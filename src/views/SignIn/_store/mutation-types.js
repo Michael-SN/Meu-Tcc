@@ -1,3 +1,3 @@
-export const SIGN_IN_REQUEST = 'SIGN_IN_REQUEST'
-export const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS'
-export const SIGN_IN_FAILURE = 'SIGN_IN_FAILURE'
+export const SIGN_IN_LOADING = 'SIGN_IN_LOADING'
+export const SIGN_IN_DATA = 'SIGN_IN_DATA'
+export const SIGN_IN_ERROR = 'SIGN_IN_ERROR'

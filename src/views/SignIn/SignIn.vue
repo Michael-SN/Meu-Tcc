@@ -4,7 +4,7 @@
       <div class="page-header min-vh-100">
         <div class="container">
           <div class="row">
-            <div class="mx-auto col-xl-4 col-lg-5 col-md-6 d-flex flex-column">
+            <div class="mx-auto col-lg-5 col-md-6 d-flex flex-column">
               <div class="mt-8 card card-plain">
                 <div class="pb-0 card-header text-start">
                   <h3 class="font-weight-bolder text-success text-gradient">
@@ -44,24 +44,12 @@
                         variant="gradient"
                         color="success"
                         full-width
+                        :disabled="request.loading"
                         >Sign in
                       </soft-button>
                     </div>
                   </form>
                 </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div
-                class="top-0 end-0 bottom-0 position-absolute w-50 h-100 d-md-block d-none me-n8"
-              >
-                <div
-                  class="bg-cover position-absolute fixed-top h-100"
-                  :style="{
-                    backgroundImage:
-                      'url(' + require('@/assets/img/sign-in/bg-signin.jpg') + ')',
-                  }"
-                ></div>
               </div>
             </div>
           </div>
@@ -72,18 +60,16 @@
 </template>
 
 <script>
-import { createNamespacedHelpers } from "vuex";
 import register from "@/views/SignIn/_store/register";
 import SoftInput from "@/components/SoftInput.vue";
 import SoftSwitch from "@/components/SoftSwitch.vue";
 import SoftButton from "@/components/SoftButton.vue";
 const body = document.getElementsByTagName("body")[0];
-
-const { mapState, mapActions } = createNamespacedHelpers("auth");
 import { mapMutations } from "vuex";
 
-import Toastify from "toastify-js";
-import "toastify-js/src/toastify.css";
+import { onToastify } from "@/helpers";
+
+import axiosInstance from "@/axios";
 
 export default {
   name: "SignIn",
@@ -94,24 +80,10 @@ export default {
         password: "",
         remember: false,
       },
+      request: {
+        loading: false,
+      },
     };
-  },
-  watch: {
-    "$store.state.auth.failure": function (newValue) {
-      console.log(newValue);
-      if (newValue) {
-        Toastify({
-          text: newValue,
-        }).showToast();
-      }
-    },
-    "$store.state.auth.success": function (newValue) {
-      console.log("SUCCESS", newValue);
-      if (newValue) this.$router.push("/dashboard");
-    },
-  },
-  computed: {
-    ...mapState(["success", "failure", "loading"]),
   },
   components: {
     SoftInput,
@@ -138,10 +110,28 @@ export default {
   },
   methods: {
     ...mapMutations(["toggleEveryDisplay", "toggleHideConfig"]),
-    ...mapActions(["signIn"]),
 
-    handleSignIn() {
-      this.signIn(this.user);
+    async handleSignIn() {
+      this.request.loading = true;
+
+      try {
+        const { data } = await axiosInstance.post("/auth/login", {
+          email: this.user.email,
+          password: this.user.password,
+          remember: this.user.remember,
+        });
+
+        localStorage.setItem("token", `Bearer ${data.token}`);
+
+        if (this.user.remember) localStorage.setItem("email_remember", this.user.email);
+        else localStorage.removeItem("email_remember");
+
+        this.$router.push("/dashboard");
+      } catch ({ response: { data: message } }) {
+        onToastify(message);
+      }
+
+      this.request.loading = false;
     },
   },
 };

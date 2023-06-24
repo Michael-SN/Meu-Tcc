@@ -1,25 +1,24 @@
-import axiosInstance from "@/axios";
-import * as mutation from './mutation-types'
+// import axiosInstance from "@/axios";
+// import * as mutation from './mutation-types'
 
 
-export default {
+// export default {
 
-  signIn: async ({ commit }, { email, password, remember }) => {
-    try {
-      commit(mutation.SIGN_IN_REQUEST)
-      const { data } = await axiosInstance.post('/auth/login', { email, password, remember })
+//   signIn: async ({ commit }, { email, password, remember }) => {
+//     try {
+//       commit(mutation.SIGN_IN_LOADING)
 
-      localStorage.setItem('token', `Bearer ${data.token}`)
 
-      if (remember) localStorage.setItem('email_remember', email)
-      else localStorage.removeItem('email_remember')
+//       commit(mutation.SIGN_IN_DATA, data)
 
-      commit(mutation.SIGN_IN_SUCCESS)
+//       return data
 
-    } catch ({ message }) {
+//     } catch (error) {
 
-      commit(mutation.SIGN_IN_FAILURE, { message })
-    }
-  }
-}
+//       commit(mutation.SIGN_IN_ERROR, error)
+
+//       return error
+//     }
+//   }
+// }
 

@@ -67,7 +67,7 @@ Let us know your thoughts below. And good luck with development!
 
 - [Profile](https://demos.creative-tim.com/vue-soft-ui-dashboard/#/profile?ref=readme-vsud)
 - [Sign In](https://demos.creative-tim.com/vue-soft-ui-dashboard/#/sign-in?ref=readme-vsud)
-- [Sign Up](https://demos.creative-tim.com/vue-soft-ui-dashboard/#/sign-up?ref=readme-vsud)
+- [Logout](https://demos.creative-tim.com/vue-soft-ui-dashboard/#/sign-up?ref=readme-vsud)
 
 [View More](https://demos.creative-tim.com/vue-soft-ui-dashboard/#/dashboard?ref=readme-vsud).
 
