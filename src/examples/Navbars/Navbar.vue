@@ -23,16 +23,14 @@
             <input
               type="text"
               class="form-control"
-              :placeholder="
-                this.$store.state.isRTL ? 'أكتب هنا...' : 'Type here...'
-              "
+              :placeholder="this.$store.state.isRTL ? 'أكتب هنا...' : 'Type here...'"
             />
           </div>
         </div>
         <ul class="navbar-nav justify-content-end">
           <li class="nav-item d-flex align-items-center">
             <router-link
-              :to="{ name: 'Sign In' }"
+              :to="{ name: 'Logout' }"
               class="px-0 nav-link font-weight-bold"
               :class="textWhite ? textWhite : 'text-body'"
             >
@@ -43,7 +41,7 @@
               <span v-if="this.$store.state.isRTL" class="d-sm-inline d-none"
                 >يسجل دخول</span
               >
-              <span v-else class="d-sm-inline d-none">Sign In </span>
+              <span v-else class="d-sm-inline d-none">Logout</span>
             </router-link>
           </li>
           <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
@@ -76,10 +74,7 @@
             <a
               href="#"
               class="p-0 nav-link"
-              :class="[
-                textWhite ? textWhite : 'text-body',
-                showMenu ? 'show' : '',
-              ]"
+              :class="[textWhite ? textWhite : 'text-body', showMenu ? 'show' : '']"
               id="dropdownMenuButton"
               data-bs-toggle="dropdown"
               aria-expanded="false"
@@ -104,8 +99,7 @@
                     </div>
                     <div class="d-flex flex-column justify-content-center">
                       <h6 class="mb-1 text-sm font-weight-normal">
-                        <span class="font-weight-bold">New message</span> from
-                        Laur
+                        <span class="font-weight-bold">New message</span> from Laur
                       </h6>
                       <p class="mb-0 text-xs text-secondary">
                         <i class="fa fa-clock me-1"></i>
@@ -127,8 +121,7 @@
                     </div>
                     <div class="d-flex flex-column justify-content-center">
                       <h6 class="mb-1 text-sm font-weight-normal">
-                        <span class="font-weight-bold">New album</span> by
-                        Travis Scott
+                        <span class="font-weight-bold">New album</span> by Travis Scott
                       </h6>
                       <p class="mb-0 text-xs text-secondary">
                         <i class="fa fa-clock me-1"></i>
@@ -141,9 +134,7 @@
               <li>
                 <a class="dropdown-item border-radius-md" href="javascript:;">
                   <div class="py-1 d-flex">
-                    <div
-                      class="my-auto avatar avatar-sm bg-gradient-secondary me-3"
-                    >
+                    <div class="my-auto avatar avatar-sm bg-gradient-secondary me-3">
                       <svg
                         width="12px"
                         height="12px"
@@ -153,12 +144,7 @@
                         xmlns:xlink="http://www.w3.org/1999/xlink"
                       >
                         <title>credit-card</title>
-                        <g
-                          stroke="none"
-                          stroke-width="1"
-                          fill="none"
-                          fill-rule="evenodd"
-                        >
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                           <g
                             transform="translate(-2169.000000, -745.000000)"
                             fill="#FFFFFF"
