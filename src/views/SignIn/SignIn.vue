@@ -13,7 +13,11 @@
                   <p class="mb-0">Enter your email and password to sign in</p>
                 </div>
                 <div class="card-body">
-                  <form role="form" class="text-start" @submit.prevent="handleSignIn">
+                  <form
+                    role="form"
+                    class="text-start"
+                    @submit.prevent="handleSignIn"
+                  >
                     <label>Email</label>
                     <soft-input
                       id="email"
@@ -76,8 +80,8 @@ export default {
   data() {
     return {
       user: {
-        email: "",
-        password: "",
+        email: "michael.contato@contato.com.br",
+        password: "123456",
         remember: false,
       },
       request: {
@@ -123,12 +127,13 @@ export default {
 
         localStorage.setItem("token", `Bearer ${data.token}`);
 
-        if (this.user.remember) localStorage.setItem("email_remember", this.user.email);
+        if (this.user.remember)
+          localStorage.setItem("email_remember", this.user.email);
         else localStorage.removeItem("email_remember");
 
         this.$router.push("/dashboard");
-      } catch ({ response: { data: message } }) {
-        onToastify(message);
+      } catch (error) {
+        onToastify(error?.response?.data);
       }
 
       this.request.loading = false;
