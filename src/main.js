@@ -15,7 +15,7 @@ Coded by www.creative-tim.com
 
 import { createApp } from "vue";
 import App from "./App.vue";
-import store from "./store/";
+import store from "./store/index";
 import legacy from "./store/legacy";
 import router from "./router";
 import "./assets/css/nucleo-icons.css";
