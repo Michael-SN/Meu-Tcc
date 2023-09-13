@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import register from "@/views/SignIn/_store/register";
+// import register from "@/views/SignIn/_store/register";
 import SoftInput from "@/components/SoftInput.vue";
 import SoftSwitch from "@/components/SoftSwitch.vue";
 import SoftButton from "@/components/SoftButton.vue";
@@ -74,6 +74,7 @@ import { mapMutations } from "vuex";
 import { onToastify } from "@/helpers";
 
 import axiosInstance from "@/axios";
+import { PUBLIC_API } from "@/config";
 
 export default {
   name: "SignIn",
@@ -95,7 +96,7 @@ export default {
     SoftButton,
   },
   created() {
-    register(this.$store);
+    // register(this.$store);
     this.toggleEveryDisplay();
     this.toggleHideConfig();
     body.classList.remove("bg-gray-100");
@@ -119,7 +120,7 @@ export default {
       this.request.loading = true;
 
       try {
-        const { data } = await axiosInstance.post("/auth/login", {
+        const { data } = await axiosInstance.post(`${PUBLIC_API}/auth/login`, {
           email: this.user.email,
           password: this.user.password,
           remember: this.user.remember,
