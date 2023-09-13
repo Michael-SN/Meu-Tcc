@@ -1,9 +1,8 @@
 import axios from 'axios'
-
-const PORT = process.env.VUE_APP_PORT
+import { BASE_URL } from '@/config'
 
 const axiosInstance = axios.create({
-  baseURL: `http://localhost:${PORT}`
+  baseURL: BASE_URL
 })
 
 axiosInstance.interceptors.request.use(

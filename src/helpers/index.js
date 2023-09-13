@@ -2,10 +2,12 @@ import AxiosInstance from "@/axios";
 import Toastify from "toastify-js";
 import "toastify-js/src/toastify.css";
 
+const PUBLIC_API = process.env.VUE_APP_PUBLIC_API
+
 export const isAuthenticated = async () => {
   const token = localStorage.getItem('token')
   try {
-    await AxiosInstance.post('/auth/validate', { token })
+    await AxiosInstance.post(`${PUBLIC_API}/auth/validate`, { token })
     return true
   } catch {
     return false
