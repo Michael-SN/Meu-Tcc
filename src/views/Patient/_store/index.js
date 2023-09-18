@@ -4,7 +4,9 @@ import mutations from './mutations'
 
 const state = {
   patient: null,
-  patients: []
+  patients: [],
+  patientMeasure: null,
+  patientMeasuresList: []
 }
 
 export default {

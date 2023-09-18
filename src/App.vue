@@ -4,6 +4,7 @@
     :class="[
       this.$store.state.isTransparent,
       this.$store.state.isRTL ? 'fixed-end' : 'fixed-start',
+      this.$store.state.showSidenav ? 'z-3' : 'z-0',
     ]"
     v-if="this.$store.state.showSidenav"
   />

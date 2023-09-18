@@ -1,12 +1,12 @@
 import axiosInstance from "@/axios";
 import * as mutation from './mutation-types'
-
+import { PRIVATE_API } from '@/config'
 
 export default {
   patientCreate: async ({ commit }, payload) => {
     try {
 
-      const { data } = await axiosInstance.post('/patient/create', payload)
+      const { data } = await axiosInstance.post(`${PRIVATE_API}/patient/create`, payload)
 
       commit(mutation.PATIENT_DATA, data)
 
@@ -27,7 +27,7 @@ export default {
   patientList: async ({ commit }) => {
     try {
 
-      const { data } = await axiosInstance.get('/patient/list')
+      const { data } = await axiosInstance.get(`${PRIVATE_API}/patient/list`)
 
       commit(mutation.PATIENT_LIST, data)
 
@@ -56,9 +56,15 @@ export default {
         }
       }
 
-      const { data } = await axiosInstance.get(`/patient/list/${payload}`)
+      const [patientData, patientMeasureList] = await Promise.all([
+        axiosInstance.get(`${PRIVATE_API}/patient/list/${payload}`),
+        axiosInstance.get(`${PRIVATE_API}/patient/list/${payload}/measures`)
+      ])
 
-      commit(mutation.PATIENT_DATA, data)
+      console.log(patientMeasureList)
+
+      commit(mutation.PATIENT_DATA, patientData.data)
+      commit(mutation.PATIENT_MEASURE_LIST, patientMeasureList.data)
 
       return {
         success: true,
@@ -76,7 +82,7 @@ export default {
   patientDelete: async ({ commit }, payload) => {
     try {
 
-      await axiosInstance.delete(`/patient/delete/${payload}`)
+      await axiosInstance.delete(`${PRIVATE_API}/patient/delete/${payload}`)
 
       commit(mutation.PATIENT_DATA, null)
 
@@ -98,7 +104,7 @@ export default {
 
       const patientId = state?.patient.id
 
-      const { data } = await axiosInstance.put(`/patient/update/${patientId}`, payload)
+      const { data } = await axiosInstance.put(`${PRIVATE_API}/patient/update/${patientId}`, payload)
 
       commit(mutation.PATIENT_DATA, data)
 
