@@ -1,7 +1,6 @@
 <template>
   <aside
-    class="my-3 overflow-auto border-0 sidenav navbar navbar-vertical navbar-expand-xs border-radius-xl"
-    :class="isRTL ? 'me-3 rotate-caret' : 'ms-3'"
+    class="my-3 ms-3 overflow-auto border-0 sidenav navbar navbar-vertical navbar-expand-xs border-radius-xl"
     id="sidenav-main"
   >
     <div class="sidenav-header">
@@ -10,10 +9,10 @@
         aria-hidden="true"
         id="iconSidenav"
       ></i>
-      <a class="m-0 navbar-brand" href="/">
+      <router-link class="m-0 navbar-brand" to="/dashboard">
         <img :src="logo" class="navbar-brand-img h-100" alt="main_logo" />
-        <span class="ms-1 font-weight-bold">Soft UI Dashboard PRO</span>
-      </a>
+        <span class="ms-1 font-weight-bold">Sistema de Nutrição</span>
+      </router-link>
     </div>
     <hr class="mt-0 horizontal dark" />
     <sidenav-list :cardBg="customClass" />
@@ -21,8 +20,7 @@
 </template>
 <script>
 import SidenavList from "./SidenavList.vue";
-import logo from "@/assets/img/logo-ct.png";
-import { mapState } from "vuex";
+import logo from "@/assets/img/logo-nutrition.png";
 
 export default {
   name: "index",
@@ -39,9 +37,6 @@ export default {
       type: String,
       default: "",
     },
-  },
-  computed: {
-    ...mapState(["isRTL"]),
   },
 };
 </script>

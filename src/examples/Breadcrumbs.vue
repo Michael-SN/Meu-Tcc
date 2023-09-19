@@ -5,14 +5,7 @@
       :class="this.$store.state.isRTL ? '' : ' me-sm-6'"
     >
       <li class="text-sm breadcrumb-item" :class="textWhite">
-        <a
-          v-if="this.$store.state.isRTL"
-          :class="textWhite"
-          class="opacity-5 ps-2"
-          href="#"
-          >لوحات القيادة</a
-        >
-        <a v-else :class="textWhite" class="opacity-8" href="#">Pages</a>
+        <a :class="textWhite" class="opacity-8" href="#">Pages</a>
       </li>
       <li
         class="text-sm breadcrumb-item active"

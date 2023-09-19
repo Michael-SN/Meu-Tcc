@@ -7,7 +7,6 @@ export default createStore({
     isPinned: true,
     showConfig: false,
     isTransparent: "",
-    isRTL: false,
     color: "",
     isNavFixed: false,
     isAbsolute: false,
@@ -22,9 +21,11 @@ export default createStore({
     bootstrap,
   },
   mutations: {
+    // Mosta o menu de config na lateral direita
     toggleConfigurator(state) {
       state.showConfig = !state.showConfig;
     },
+    // Oculta/Mostra o aside
     navbarMinimize(state) {
       const sidenav_show = document.querySelector(".g-sidenav-show");
       if (sidenav_show.classList.contains("g-sidenav-hidden")) {

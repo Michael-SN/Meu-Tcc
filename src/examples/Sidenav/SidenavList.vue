@@ -5,7 +5,9 @@
   >
     <ul class="navbar-nav">
       <li class="mt-3 nav-item">
-        <h6 class="text-xs ps-4 text-uppercase font-weight-bolder opacity-6 ms-2">
+        <h6
+          class="text-xs ps-4 text-uppercase font-weight-bolder opacity-6 ms-2"
+        >
           MENU
         </h6>
       </li>
@@ -24,28 +26,6 @@
         </sidenav-collapse>
       </li>
       <li class="nav-item">
-        <sidenav-collapse navText="Billing" :to="{ name: 'Billing' }">
-          <template #icon>
-            <credit-card />
-          </template>
-        </sidenav-collapse>
-      </li>
-
-      <li class="nav-item">
-        <sidenav-collapse navText="Virtual Reality" :to="{ name: 'Virtual Reality' }">
-          <template #icon>
-            <box3d />
-          </template>
-        </sidenav-collapse>
-      </li>
-      <li class="nav-item">
-        <sidenav-collapse navText="RTL" :to="{ name: 'Rtl' }">
-          <template #icon>
-            <settings />
-          </template>
-        </sidenav-collapse>
-      </li>
-      <li class="nav-item">
         <sidenav-collapse navText="Perfil" :to="{ name: 'Profile' }">
           <template #icon>
             <customer-support />
@@ -59,6 +39,27 @@
           </template>
         </sidenav-collapse>
       </li>
+      <!-- <li class="nav-item">
+        <sidenav-collapse navText="Billing" :to="{ name: 'Billing' }">
+          <template #icon>
+            <credit-card />
+          </template>
+        </sidenav-collapse>
+      </li> -->
+      <!-- <li class="nav-item">
+        <sidenav-collapse navText="Virtual Reality" :to="{ name: 'Virtual Reality' }">
+          <template #icon>
+            <box3d />
+          </template>
+        </sidenav-collapse>
+      </li> -->
+      <!-- <li class="nav-item">
+        <sidenav-collapse navText="RTL" :to="{ name: 'Rtl' }">
+          <template #icon>
+            <settings />
+          </template>
+        </sidenav-collapse>
+      </li> -->
     </ul>
   </div>
 </template>
@@ -66,11 +67,11 @@
 import SidenavCollapse from "./SidenavCollapse.vue";
 import Shop from "../../components/Icon/Shop.vue";
 import Office from "../../components/Icon/Office.vue";
-import CreditCard from "../../components/Icon/CreditCard.vue";
-import Box3d from "../../components/Icon/Box3d.vue";
+// import CreditCard from "../../components/Icon/CreditCard.vue";
+// import Box3d from "../../components/Icon/Box3d.vue";
 import CustomerSupport from "../../components/Icon/CustomerSupport.vue";
 import Spaceship from "../../components/Icon/Spaceship.vue";
-import Settings from "../../components/Icon/Settings.vue";
+// import Settings from "../../components/Icon/Settings.vue";
 
 export default {
   name: "SidenavList",
@@ -88,11 +89,11 @@ export default {
     SidenavCollapse,
     Shop,
     Office,
-    CreditCard,
-    Box3d,
+    // CreditCard,
+    // Box3d,
     CustomerSupport,
     Spaceship,
-    Settings,
+    // Settings,
   },
   methods: {
     getRoute() {

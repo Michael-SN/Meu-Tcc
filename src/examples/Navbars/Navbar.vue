@@ -8,25 +8,19 @@
     <div class="px-3 py-1 container-fluid">
       <breadcrumbs :currentPage="currentRouteName" :textWhite="textWhite" />
       <div
-        class="mt-2 collapse navbar-collapse mt-sm-0 me-md-0 me-sm-4"
-        :class="this.$store.state.isRTL ? 'px-0' : 'me-sm-4'"
+        class="mt-2 collapse navbar-collapse mt-sm-0 me-md-0 me-sm-4 justify-content-end"
         id="navbar"
       >
-        <div
-          class="pe-md-3 d-flex align-items-center"
-          :class="this.$store.state.isRTL ? 'me-md-auto' : 'ms-md-auto'"
-        >
+        <!-- Campo de Pesquisa - off por hora -->
+        <!-- <div class="pe-md-3 d-flex align-items-center">
           <div class="input-group">
             <span class="input-group-text text-body"
               ><i class="fas fa-search" aria-hidden="true"></i
             ></span>
-            <input
-              type="text"
-              class="form-control"
-              :placeholder="this.$store.state.isRTL ? 'أكتب هنا...' : 'Type here...'"
-            />
+            <input type="text" class="form-control" placeholder="Pesquisar" />
           </div>
-        </div>
+        </div> -->
+        <!-- // Campo de Pesquisa - off por hora -->
         <ul class="navbar-nav justify-content-end">
           <li class="nav-item d-flex align-items-center">
             <router-link
@@ -34,16 +28,11 @@
               class="px-0 nav-link font-weight-bold"
               :class="textWhite ? textWhite : 'text-body'"
             >
-              <i
-                class="fa fa-user"
-                :class="this.$store.state.isRTL ? 'ms-sm-2' : 'me-sm-1'"
-              ></i>
-              <span v-if="this.$store.state.isRTL" class="d-sm-inline d-none"
-                >يسجل دخول</span
-              >
-              <span v-else class="d-sm-inline d-none">Logout</span>
+              <i class="fa fa-sign-out"></i>
+              <span class="d-sm-inline d-none ps-2">Sair</span>
             </router-link>
           </li>
+          <!-- Mobile ToggleSideBar -->
           <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
             <a
               href="#"
@@ -58,7 +47,8 @@
               </div>
             </a>
           </li>
-          <li class="px-3 nav-item d-flex align-items-center">
+          <!-- // Configurator Panel -->
+          <!-- <li class="px-3 nav-item d-flex align-items-center">
             <a
               class="p-0 nav-link"
               @click="toggleConfigurator"
@@ -66,15 +56,17 @@
             >
               <i class="cursor-pointer fa fa-cog fixed-plugin-button-nav"></i>
             </a>
-          </li>
-          <li
-            class="nav-item dropdown d-flex align-items-center"
-            :class="this.$store.state.isRTL ? 'ps-2' : 'pe-2'"
-          >
+          </li> -->
+          <!-- // Configurator Panel -->
+          <!-- Notification Panel -->
+          <!-- <li class="nav-item dropdown d-flex align-items-center">
             <a
               href="#"
               class="p-0 nav-link"
-              :class="[textWhite ? textWhite : 'text-body', showMenu ? 'show' : '']"
+              :class="[
+                textWhite ? textWhite : 'text-body',
+                showMenu ? 'show' : '',
+              ]"
               id="dropdownMenuButton"
               data-bs-toggle="dropdown"
               aria-expanded="false"
@@ -99,7 +91,8 @@
                     </div>
                     <div class="d-flex flex-column justify-content-center">
                       <h6 class="mb-1 text-sm font-weight-normal">
-                        <span class="font-weight-bold">New message</span> from Laur
+                        <span class="font-weight-bold">New message</span> from
+                        Laur
                       </h6>
                       <p class="mb-0 text-xs text-secondary">
                         <i class="fa fa-clock me-1"></i>
@@ -121,7 +114,8 @@
                     </div>
                     <div class="d-flex flex-column justify-content-center">
                       <h6 class="mb-1 text-sm font-weight-normal">
-                        <span class="font-weight-bold">New album</span> by Travis Scott
+                        <span class="font-weight-bold">New album</span> by
+                        Travis Scott
                       </h6>
                       <p class="mb-0 text-xs text-secondary">
                         <i class="fa fa-clock me-1"></i>
@@ -134,7 +128,9 @@
               <li>
                 <a class="dropdown-item border-radius-md" href="javascript:;">
                   <div class="py-1 d-flex">
-                    <div class="my-auto avatar avatar-sm bg-gradient-secondary me-3">
+                    <div
+                      class="my-auto avatar avatar-sm bg-gradient-secondary me-3"
+                    >
                       <svg
                         width="12px"
                         height="12px"
@@ -144,7 +140,12 @@
                         xmlns:xlink="http://www.w3.org/1999/xlink"
                       >
                         <title>credit-card</title>
-                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g
+                          stroke="none"
+                          stroke-width="1"
+                          fill="none"
+                          fill-rule="evenodd"
+                        >
                           <g
                             transform="translate(-2169.000000, -745.000000)"
                             fill="#FFFFFF"
@@ -180,7 +181,8 @@
                 </a>
               </li>
             </ul>
-          </li>
+          </li> -->
+          <!-- // Notification Panel -->
         </ul>
       </div>
     </div>
@@ -215,6 +217,7 @@ export default {
   },
   computed: {
     currentRouteName() {
+      console.log(this.$route);
       return this.$route.name;
     },
   },

@@ -7,10 +7,19 @@
             <div class="mx-auto col-lg-5 col-md-6 d-flex flex-column">
               <div class="mt-8 card card-plain">
                 <div class="pb-0 card-header text-start">
-                  <h3 class="font-weight-bolder text-success text-gradient">
-                    Welcome back
-                  </h3>
-                  <p class="mb-0">Enter your email and password to sign in</p>
+                  <div class="row align-items-center">
+                    <div class="col-3">
+                      <img :src="logo" class="img-fluid" alt="main_logo" />
+                    </div>
+                    <div class="col-9">
+                      <h3 class="font-weight-bolder text-success text-gradient">
+                        Sistema de Nutrição
+                      </h3>
+                      <p class="mb-0">
+                        Entre com seu e-mail e senha para acessar.
+                      </p>
+                    </div>
+                  </div>
                 </div>
                 <div class="card-body">
                   <form
@@ -26,7 +35,7 @@
                       name="email"
                       v-model:value="user.email"
                     />
-                    <label>Password</label>
+                    <label>Senha</label>
                     <soft-input
                       id="password"
                       type="password"
@@ -40,7 +49,7 @@
                       :checked="user.remember"
                       v-model:checked="user.remember"
                     >
-                      Remember me
+                      Lembrar-me
                     </soft-switch>
                     <div class="text-center">
                       <soft-button
@@ -49,7 +58,7 @@
                         color="success"
                         full-width
                         :disabled="request.loading"
-                        >Sign in
+                        >Entrar
                       </soft-button>
                     </div>
                   </form>
@@ -64,15 +73,15 @@
 </template>
 
 <script>
-// import register from "@/views/SignIn/_store/register";
 import SoftInput from "@/components/SoftInput.vue";
 import SoftSwitch from "@/components/SoftSwitch.vue";
 import SoftButton from "@/components/SoftButton.vue";
+import logo from "@/assets/img/logo-nutrition.png";
+
 const body = document.getElementsByTagName("body")[0];
+
 import { mapMutations } from "vuex";
-
 import { onToastify } from "@/helpers";
-
 import axiosInstance from "@/axios";
 import { PUBLIC_API } from "@/config";
 
@@ -80,6 +89,7 @@ export default {
   name: "SignIn",
   data() {
     return {
+      logo,
       user: {
         email: "michael.contato@contato.com.br",
         password: "123456",
@@ -96,7 +106,6 @@ export default {
     SoftButton,
   },
   created() {
-    // register(this.$store);
     this.toggleEveryDisplay();
     this.toggleHideConfig();
     body.classList.remove("bg-gray-100");
