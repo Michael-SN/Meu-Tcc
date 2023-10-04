@@ -18,4 +18,8 @@ axiosInstance.interceptors.request.use(
   }
 );
 
+export function viaCEP(cep) {
+  return axios.get(`https://viacep.com.br/ws/${cep}/json/`)
+}
+
 export default axiosInstance
