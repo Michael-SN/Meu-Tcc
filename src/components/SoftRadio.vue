@@ -6,6 +6,8 @@
       type="radio"
       :name="name"
       :checked="checked"
+      :value="value"
+      @input="$emit('update:value', $event.target.value)"
     />
     <label class="custom-control-label" :for="id">
       <slot />
@@ -28,6 +30,10 @@ export default {
     checked: {
       type: Boolean,
       default: false,
+    },
+    value: {
+      type: String,
+      required: true,
     },
   },
 };

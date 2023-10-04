@@ -14,6 +14,7 @@
         :placeholder="placeholder"
         :isRequired="isRequired"
         @input="$emit('update:value', $event.target.value)"
+        :disabled="disabled"
       />
       <span v-if="iconDir === 'right'" class="input-group-text">
         <i :class="getIcon(icon)"></i>
@@ -67,6 +68,10 @@ export default {
       default: "text",
     },
     isRequired: {
+      type: Boolean,
+      default: false,
+    },
+    disabled: {
       type: Boolean,
       default: false,
     },
