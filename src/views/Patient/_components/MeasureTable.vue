@@ -11,27 +11,27 @@
               <th
                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
               >
-                Pescoço
+                Altura (cm)
               </th>
               <th
                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
               >
-                Braços
+                Peso (kg)
               </th>
               <th
                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
               >
-                Pernas
+                Peitoral (cm)
               </th>
               <th
                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
               >
-                Peitoral
+                Cintura (cm)
               </th>
               <th
                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
               >
-                Torso
+                Quadril (cm)
               </th>
               <th
                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
@@ -45,17 +45,12 @@
             <tr v-for="measure in measures" :key="measure.id">
               <td class="align-middle text-sm">
                 <p class="text-xs font-weight-bold mb-0">
-                  {{ measure.neck }}
+                  {{ measure.height }}
                 </p>
               </td>
               <td class="align-middle text-sm">
                 <p class="text-xs font-weight-bold mb-0">
-                  {{ measure.arms }}
-                </p>
-              </td>
-              <td class="align-middle text-sm">
-                <p class="text-xs font-weight-bold mb-0">
-                  {{ measure.legs }}
+                  {{ measure.weight }}
                 </p>
               </td>
               <td class="align-middle text-sm">
@@ -65,7 +60,12 @@
               </td>
               <td class="align-middle text-sm">
                 <p class="text-xs font-weight-bold mb-0">
-                  {{ measure.torso }}
+                  {{ measure.waist }}
+                </p>
+              </td>
+              <td class="align-middle text-sm">
+                <p class="text-xs font-weight-bold mb-0">
+                  {{ measure.hips }}
                 </p>
               </td>
               <td class="align-middle text-sm">
@@ -82,19 +82,13 @@
 </template>
 
 <script>
-import SoftBadge from "@/components/SoftBadge.vue";
-
 export default {
-  name: "authors-table",
+  name: "measures-table",
   props: {
     measures: {
       type: Array,
       required: true,
     },
-  },
-  components: {
-    // eslint-disable-next-line vue/no-unused-components
-    SoftBadge,
   },
 };
 </script>

@@ -1,141 +1,51 @@
 <template>
-  <div class="card">
-    <div class="card-header pb-0">
-      <h6>Cadastrar um novo paciente</h6>
+  <div class="container-fluid">
+    <div
+      class="mt-4 page-header min-height-200 border-radius-xl bg-dark"
+      :style="{
+        backgroundImage:
+          'url(' + require('@/assets/img/curved-images/curved14.jpg') + ')',
+        backgroundPositionY: '50%',
+      }"
+    >
+      <span class="mask bg-gradient-success opacity-6"></span>
     </div>
-    <div class="card-body">
-      <form role="form" @submit.prevent="handleUpdate">
-        <div class="row">
-          <div class="col-6">
-            <soft-input
-              id="name"
-              type="text"
-              placeholder="Nome completo"
-              aria-label="Name"
-              v-model:value="patientDataUpdate.fullName"
-            />
-          </div>
-          <div class="col-6">
-            <soft-input
-              id="cpf"
-              type="text"
-              placeholder="CPF"
-              aria-label="CPF"
-              v-model:value="patientDataUpdate.cpf"
-            />
+    <div class="mx-4 overflow-hidden card card-body blur shadow-blur mt-n6">
+      <div class="row gx-4">
+        <div class="col-auto my-auto">
+          <div class="h-100 py-2">
+            <h5 class="mb-1">Editar dados do paciente</h5>
           </div>
         </div>
-        <div class="row">
-          <div class="col-6">
-            <soft-input
-              id="email"
-              type="email"
-              placeholder="Email"
-              aria-label="Email"
-              v-model:value="patientDataUpdate.email"
-            />
-          </div>
-          <div class="col-6">
-            <soft-input
-              id="dateOfBirth"
-              type="date"
-              aria-label="Data de Nacimento"
-              v-model:value="patientDataUpdate.dateOfBirth"
-            />
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-6">
-            <soft-input
-              id="telephone"
-              type="text"
-              placeholder="Telefone"
-              aria-label="Telefone"
-              v-model:value="patientDataUpdate.telephone"
-            />
-          </div>
-          <div class="col-6">
-            <soft-input
-              id="phoneNumber"
-              type="text"
-              placeholder="(DDD) 99999-9999"
-              aria-label="(DDD) 99999-9999"
-              v-model:value="patientDataUpdate.phoneNumber"
-            />
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12">
-            <soft-input
-              id="address"
-              type="text"
-              placeholder="Endereço"
-              aria-label="Endereço"
-              v-model:value="patientDataUpdate.address"
-            />
-          </div>
-        </div>
-
-        <div class="text-center">
-          <soft-button
-            color="dark"
-            full-width
-            variant="gradient"
-            class="my-4 mb-2"
-            >Atualizar Dados do paciente</soft-button
-          >
-        </div>
-      </form>
+      </div>
     </div>
   </div>
+  <PatientForm :patientData="patient" :onSubmit="handleUpdate" action="Editar" />
 </template>
 
 <script>
 import { createNamespacedHelpers } from "vuex";
 const { mapState, mapActions } = createNamespacedHelpers("patients");
 
-import SoftInput from "@/components/SoftInput.vue";
-import SoftButton from "@/components/SoftButton.vue";
-
+import setNavPills from "@/assets/js/nav-pills.js";
+import setTooltip from "@/assets/js/tooltip.js";
 import { onToastify } from "@/helpers";
+import PatientForm from "./_components/PatientForm.vue";
 
 export default {
   name: "PatientEdit",
-  data() {
-    return {
-      patientDataUpdate: {
-        fullName: "",
-        cpf: "",
-        email: "",
-        dateOfBirth: "",
-        telephone: "",
-        phoneNumber: "",
-        address: "",
-      },
-    };
-  },
   computed: {
     ...mapState(["patient"]),
   },
-  async created() {
-    const patientId = this.$route.params.id;
-    const { success } = await this.patientData(patientId);
 
-    if (success) {
-      this.patientDataUpdate = this.patient;
-    }
-  },
   components: {
-    SoftInput,
-    SoftButton,
+    PatientForm,
   },
   methods: {
     ...mapActions(["patientData", "patientUpdate"]),
 
-    async handleUpdate() {
-      const { success, error, data } = await this.patientUpdate(
-        this.patientDataUpdate
-      );
+    async handleUpdate(dataPatient) {
+      const { success, error, data } = await this.patientUpdate(dataPatient);
 
       if (success) {
         const {
@@ -150,6 +60,17 @@ export default {
         onToastify(message);
       }
     },
+  },
+  beforeMount() {
+    this.$store.state.isAbsolute = false;
+  },
+  mounted() {
+    this.$store.state.isAbsolute = true;
+    setNavPills();
+    setTooltip(this.$store.state.bootstrap);
+
+    const patientId = this.$route.params.id;
+    this.patientData(patientId);
   },
 };
 </script>

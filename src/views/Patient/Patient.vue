@@ -6,11 +6,13 @@
 </template>
 
 <script>
-import register from "@/views/Patient/_store/register";
+import registerPatient from "@/views/Patient/_store/register";
+import registerMeasure from "@/views/Measure/_store/register";
 
 export default {
   created() {
-    register(this.$store);
+    registerPatient(this.$store);
+    registerMeasure(this.$store);
   },
 };
 </script>

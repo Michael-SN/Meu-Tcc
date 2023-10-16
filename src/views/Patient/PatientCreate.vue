@@ -1,124 +1,46 @@
 <template>
-  <div class="card">
-    <div class="card-header pb-0">
-      <h6>Cadastrar um novo paciente</h6>
+  <div class="container-fluid">
+    <div
+      class="mt-4 page-header min-height-200 border-radius-xl bg-dark"
+      :style="{
+        backgroundImage:
+          'url(' + require('@/assets/img/curved-images/curved14.jpg') + ')',
+        backgroundPositionY: '50%',
+      }"
+    >
+      <span class="mask bg-gradient-success opacity-6"></span>
     </div>
-    <div class="card-body">
-      <form role="form" @submit.prevent="handleCreate">
-        <div class="row">
-          <div class="col-6">
-            <soft-input
-              id="name"
-              type="text"
-              placeholder="Nome completo"
-              aria-label="Name"
-              v-model:value="patient.fullName"
-            />
-          </div>
-          <div class="col-6">
-            <soft-input
-              id="cpf"
-              type="text"
-              placeholder="CPF"
-              aria-label="CPF"
-              v-model:value="patient.cpf"
-            />
+    <div class="mx-4 overflow-hidden card card-body blur shadow-blur mt-n6">
+      <div class="row gx-4">
+        <div class="col-auto my-auto">
+          <div class="h-100 py-2">
+            <h5 class="mb-1">Cadastrar um novo paciente</h5>
           </div>
         </div>
-        <div class="row">
-          <div class="col-6">
-            <soft-input
-              id="email"
-              type="email"
-              placeholder="Email"
-              aria-label="Email"
-              v-model:value="patient.email"
-            />
-          </div>
-          <div class="col-6">
-            <soft-input
-              id="dateOfBirth"
-              type="date"
-              aria-label="Data de Nacimento"
-              v-model:value="patient.dateOfBirth"
-            />
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-6">
-            <soft-input
-              id="telephone"
-              type="text"
-              placeholder="Telefone"
-              aria-label="Telefone"
-              v-model:value="patient.telephone"
-            />
-          </div>
-          <div class="col-6">
-            <soft-input
-              id="phoneNumber"
-              type="text"
-              placeholder="(DDD) 99999-9999"
-              aria-label="(DDD) 99999-9999"
-              v-model:value="patient.phoneNumber"
-            />
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12">
-            <soft-input
-              id="address"
-              type="text"
-              placeholder="Endereço"
-              aria-label="Endereço"
-              v-model:value="patient.address"
-            />
-          </div>
-        </div>
-
-        <div class="text-center">
-          <soft-button color="dark" full-width variant="gradient" class="my-4 mb-2"
-            >Cadastrar</soft-button
-          >
-        </div>
-      </form>
+      </div>
     </div>
   </div>
+  <PatientForm :onSubmit="handleCreate" />
 </template>
 
 <script>
 import { createNamespacedHelpers } from "vuex";
 const { mapActions } = createNamespacedHelpers("patients");
 
-import SoftInput from "@/components/SoftInput.vue";
-import SoftButton from "@/components/SoftButton.vue";
-
 import { onToastify } from "@/helpers";
+import setNavPills from "@/assets/js/nav-pills.js";
+import setTooltip from "@/assets/js/tooltip.js";
+import PatientForm from "./_components/PatientForm.vue";
 
 export default {
   name: "PatientCreate",
-  data() {
-    return {
-      patient: {
-        fullName: "",
-        cpf: "",
-        email: "",
-        dateOfBirth: "",
-        telephone: "",
-        phoneNumber: "",
-        address: "",
-      },
-    };
-  },
   components: {
-    SoftInput,
-    SoftButton,
+    PatientForm,
   },
   methods: {
     ...mapActions(["patientCreate"]),
-
-    async handleCreate() {
-      const { success, error, data } = await this.patientCreate(this.patient);
+    async handleCreate(dataPatient) {
+      const { success, error, data } = await this.patientCreate(dataPatient);
 
       if (success) {
         const {
@@ -133,6 +55,14 @@ export default {
         onToastify(message);
       }
     },
+  },
+  mounted() {
+    this.$store.state.isAbsolute = true;
+    setNavPills();
+    setTooltip(this.$store.state.bootstrap);
+  },
+  beforeMount() {
+    this.$store.state.isAbsolute = false;
   },
 };
 </script>

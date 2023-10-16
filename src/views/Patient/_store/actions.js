@@ -56,15 +56,8 @@ export default {
         }
       }
 
-      const [patientData, patientMeasureList] = await Promise.all([
-        axiosInstance.get(`${PRIVATE_API}/patient/list/${payload}`),
-        axiosInstance.get(`${PRIVATE_API}/patient/list/${payload}/measures`)
-      ])
-
-      console.log(patientMeasureList)
-
+      const patientData = await axiosInstance.get(`${PRIVATE_API}/patient/list/${payload}`)
       commit(mutation.PATIENT_DATA, patientData.data)
-      commit(mutation.PATIENT_MEASURE_LIST, patientMeasureList.data)
 
       return {
         success: true,
