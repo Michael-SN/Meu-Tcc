@@ -34,3 +34,15 @@ export const formatterDate = (data) => {
   const [year, month, day] = parts;
   return `${day}/${month}/${year}`;
 };
+export const formatterISODate = (data) => {
+  const dataObj = new Date(data);
+  const dia = dataObj.getDate();
+  const mes = dataObj.getMonth() + 1; // Mês começa em 0
+  const ano = dataObj.getFullYear();
+
+  // Formatar dia e mês para ter dois dígitos
+  const diaFormatado = dia.toString().padStart(2, "0");
+  const mesFormatado = mes.toString().padStart(2, "0");
+
+  return `${diaFormatado}/${mesFormatado}/${ano}`;
+};
