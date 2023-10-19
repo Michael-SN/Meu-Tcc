@@ -5,9 +5,9 @@
         <i :class="getIcon(icon)"></i>
       </span>
       <input
+        class="form-control"
         :id="id"
         :type="type"
-        class="form-control"
         :class="getClasses(size, success, error)"
         :name="name"
         :value="value"
@@ -15,6 +15,7 @@
         :isRequired="isRequired"
         @input="$emit('update:value', $event.target.value)"
         :disabled="disabled"
+        :min="min"
       />
       <span v-if="iconDir === 'right'" class="input-group-text">
         <i :class="getIcon(icon)"></i>
@@ -56,7 +57,7 @@ export default {
       default: "",
     },
     value: {
-      type: String,
+      type: [String, Number],
       default: "",
     },
     placeholder: {
@@ -74,6 +75,10 @@ export default {
     disabled: {
       type: Boolean,
       default: false,
+    },
+    min: {
+      type: Number,
+      default: 0,
     },
   },
   methods: {
