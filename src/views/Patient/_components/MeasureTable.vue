@@ -44,33 +44,23 @@
           <tbody>
             <tr v-for="measure in measures" :key="measure.id">
               <td class="align-middle text-sm">
-                <p class="text-xs font-weight-bold mb-0">
-                  {{ measure.height }}
-                </p>
+                <p class="text-xs font-weight-bold mb-0">{{ measure.height }} cm</p>
+              </td>
+              <td class="align-middle text-sm">
+                <p class="text-xs font-weight-bold mb-0">{{ measure.weight }} kg</p>
+              </td>
+              <td class="align-middle text-sm">
+                <p class="text-xs font-weight-bold mb-0">{{ measure.chest }} cm</p>
+              </td>
+              <td class="align-middle text-sm">
+                <p class="text-xs font-weight-bold mb-0">{{ measure.waist }} cm</p>
+              </td>
+              <td class="align-middle text-sm">
+                <p class="text-xs font-weight-bold mb-0">{{ measure.hips }} cm</p>
               </td>
               <td class="align-middle text-sm">
                 <p class="text-xs font-weight-bold mb-0">
-                  {{ measure.weight }}
-                </p>
-              </td>
-              <td class="align-middle text-sm">
-                <p class="text-xs font-weight-bold mb-0">
-                  {{ measure.chest }}
-                </p>
-              </td>
-              <td class="align-middle text-sm">
-                <p class="text-xs font-weight-bold mb-0">
-                  {{ measure.waist }}
-                </p>
-              </td>
-              <td class="align-middle text-sm">
-                <p class="text-xs font-weight-bold mb-0">
-                  {{ measure.hips }}
-                </p>
-              </td>
-              <td class="align-middle text-sm">
-                <p class="text-xs font-weight-bold mb-0">
-                  {{ measure.updatedAt }}
+                  {{ formatterISODate(measure.updatedAt) }}
                 </p>
               </td>
             </tr>
@@ -82,6 +72,8 @@
 </template>
 
 <script>
+import { formatterISODate } from "../../../helpers";
+
 export default {
   name: "measures-table",
   props: {
@@ -89,6 +81,9 @@ export default {
       type: Array,
       required: true,
     },
+  },
+  methods: {
+    formatterISODate,
   },
 };
 </script>

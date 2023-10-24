@@ -1,0 +1,2 @@
+export const MEASURE_DATA = 'MEASURE_DATA'
+export const MEASURE_LIST = 'MEASURE_LIST'

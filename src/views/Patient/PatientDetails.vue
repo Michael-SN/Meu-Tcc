@@ -24,9 +24,9 @@
               <li class="nav-item">
                 <router-link
                   class="px-0 py-1 mb-0 nav-link active"
-                  :to="`/patients/${patient?.id}/edit`"
+                  :to="`/measure/${patient?.id}/create`"
                 >
-                  <span class="ms-1">Fazer Avalização</span>
+                  <span class="ms-1">Registrar medidas</span>
                 </router-link>
               </li>
             </ul>
@@ -60,7 +60,7 @@ const {
 const {
   mapState: mapStateMeasure,
   mapActions: mapActionsMeasure,
-} = createNamespacedHelpers("measurements");
+} = createNamespacedHelpers("measures");
 
 import { onToastify } from "@/helpers";
 
@@ -127,21 +127,6 @@ export default {
   methods: {
     ...mapActionsPatient(["patientData"]),
     ...mapActionsMeasure(["measureList", "measureCreate"]),
-
-    async handleSubmit() {
-      console.log(this.patient.id);
-      const { success, error } = await this.measureCreate(this.bodyMeasurements);
-
-      if (success) {
-        onToastify("Lalalala");
-      } else {
-        const {
-          response: { data: message },
-        } = error;
-
-        onToastify(message);
-      }
-    },
   },
 };
 </script>
