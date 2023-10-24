@@ -24,24 +24,40 @@ const routes = [
       {
         path: "list",
         name: "patient-list",
-        component: () => import('@/views/Patient/PatientList.vue')
+        component: () => import("@/views/Patient/PatientList.vue"),
       },
       {
         path: "create",
-        name: 'patient-create',
-        component: () => import('@/views/Patient/PatientCreate.vue')
+        name: "patient-create",
+        component: () => import("@/views/Patient/PatientCreate.vue"),
       },
       {
         path: ":id/edit",
-        name: 'patient-edit',
-        component: () => import('@/views/Patient/PatientEdit.vue')
+        name: "patient-edit",
+        component: () => import("@/views/Patient/PatientEdit.vue"),
       },
       {
         path: ":id/details",
-        name: 'patient-details',
-        component: () => import('@/views/Patient/PatientDetails.vue')
+        name: "patient-details",
+        component: () => import("@/views/Patient/PatientDetails.vue"),
       },
-    ]
+    ],
+  },
+  {
+    path: "/measure/:patientId",
+    name: "Medida",
+    children: [
+      {
+        path: "create",
+        name: "measure-create",
+        component: () => import("@/views/Measure/MeasureCreate.vue"),
+      },
+      {
+        path: "edit",
+        name: "measure-edit",
+        component: () => import("@/views/Measure/MeasureCreate.vue"),
+      },
+    ],
   },
   {
     path: "/profile",
@@ -54,7 +70,7 @@ const routes = [
   },
   {
     path: "/",
-    redirect: "/dashboard"
+    redirect: "/dashboard",
   },
 ];
 
@@ -67,14 +83,17 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
   const logged = await isAuthenticated();
 
-  if (logged && to.name === 'Sign In') {
-    next('/dashboard')
-  } else if ((logged && to.name === 'Logout') || (!logged && to.name !== 'Sign In')) {
-    localStorage.removeItem('token')
-    next('/sign-in')
+  if (logged && to.name === "Sign In") {
+    next("/dashboard");
+  } else if (
+    (logged && to.name === "Logout") ||
+    (!logged && to.name !== "Sign In")
+  ) {
+    localStorage.removeItem("token");
+    next("/sign-in");
   } else {
-    next()
+    next();
   }
-})
+});
 
 export default router;
