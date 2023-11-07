@@ -5,9 +5,7 @@
   >
     <ul class="navbar-nav">
       <li class="mt-3 nav-item">
-        <h6
-          class="text-xs ps-4 text-uppercase font-weight-bolder opacity-6 ms-2"
-        >
+        <h6 class="text-xs ps-4 text-uppercase font-weight-bolder opacity-6 ms-2">
           MENU
         </h6>
       </li>
@@ -26,7 +24,7 @@
         </sidenav-collapse>
       </li>
       <li class="nav-item">
-        <sidenav-collapse navText="Perfil" :to="{ name: 'Profile' }">
+        <sidenav-collapse navText="Perfil" :to="{ name: 'profile-info' }">
           <template #icon>
             <customer-support />
           </template>

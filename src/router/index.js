@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Dashboard from "@/views/Dashboard.vue";
 import Patient from "@/views/Patient/Patient.vue";
-import Profile from "@/views/Profile.vue";
+import Profile from "@/views/Profile/Profile.vue";
 import SignIn from "@/views/SignIn/SignIn.vue";
 import { isAuthenticated } from "@/helpers";
 
@@ -63,6 +63,18 @@ const routes = [
     path: "/profile",
     name: "Profile",
     component: Profile,
+    children: [
+      {
+        path: "info",
+        name: "profile-info",
+        component: () => import("@/views/Profile/ProfileInfo.vue"),
+      },
+      {
+        path: ":id/update",
+        name: "profile-update",
+        component: () => import("@/views/Profile/ProfileUpdate.vue"),
+      },
+    ],
   },
   {
     path: "/logout",

@@ -15,18 +15,12 @@
                       <h3 class="font-weight-bolder text-success text-gradient">
                         Sistema de Nutrição
                       </h3>
-                      <p class="mb-0">
-                        Entre com seu e-mail e senha para acessar.
-                      </p>
+                      <p class="mb-0">Entre com seu e-mail e senha para acessar.</p>
                     </div>
                   </div>
                 </div>
                 <div class="card-body">
-                  <form
-                    role="form"
-                    class="text-start"
-                    @submit.prevent="handleSignIn"
-                  >
+                  <form role="form" class="text-start" @submit.prevent="handleSignIn">
                     <label>Email</label>
                     <soft-input
                       id="email"
@@ -91,8 +85,8 @@ export default {
     return {
       logo,
       user: {
-        email: "michael.contato@contato.com.br",
-        password: "123456",
+        email: "email@nutricionista.com",
+        password: "senha123",
         remember: false,
       },
       request: {
@@ -137,8 +131,7 @@ export default {
 
         localStorage.setItem("token", `Bearer ${data.token}`);
 
-        if (this.user.remember)
-          localStorage.setItem("email_remember", this.user.email);
+        if (this.user.remember) localStorage.setItem("email_remember", this.user.email);
         else localStorage.removeItem("email_remember");
 
         this.$router.push("/dashboard");
