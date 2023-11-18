@@ -9,13 +9,13 @@
           MENU
         </h6>
       </li>
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <sidenav-collapse navText="Visão Geral" :to="{ name: 'Dashboard' }">
           <template #icon>
             <shop />
           </template>
         </sidenav-collapse>
-      </li>
+      </li> -->
       <li class="nav-item">
         <sidenav-collapse navText="Pacientes" :to="{ path: '/patients/list' }">
           <template #icon>
@@ -37,39 +37,15 @@
           </template>
         </sidenav-collapse>
       </li>
-      <!-- <li class="nav-item">
-        <sidenav-collapse navText="Billing" :to="{ name: 'Billing' }">
-          <template #icon>
-            <credit-card />
-          </template>
-        </sidenav-collapse>
-      </li> -->
-      <!-- <li class="nav-item">
-        <sidenav-collapse navText="Virtual Reality" :to="{ name: 'Virtual Reality' }">
-          <template #icon>
-            <box3d />
-          </template>
-        </sidenav-collapse>
-      </li> -->
-      <!-- <li class="nav-item">
-        <sidenav-collapse navText="RTL" :to="{ name: 'Rtl' }">
-          <template #icon>
-            <settings />
-          </template>
-        </sidenav-collapse>
-      </li> -->
     </ul>
   </div>
 </template>
 <script>
 import SidenavCollapse from "./SidenavCollapse.vue";
-import Shop from "../../components/Icon/Shop.vue";
 import Office from "../../components/Icon/Office.vue";
-// import CreditCard from "../../components/Icon/CreditCard.vue";
-// import Box3d from "../../components/Icon/Box3d.vue";
 import CustomerSupport from "../../components/Icon/CustomerSupport.vue";
 import Spaceship from "../../components/Icon/Spaceship.vue";
-// import Settings from "../../components/Icon/Settings.vue";
+// import Shop from "../../components/Icon/Shop.vue";
 
 export default {
   name: "SidenavList",
@@ -85,13 +61,10 @@ export default {
   },
   components: {
     SidenavCollapse,
-    Shop,
+    // Shop,
     Office,
-    // CreditCard,
-    // Box3d,
     CustomerSupport,
     Spaceship,
-    // Settings,
   },
   methods: {
     getRoute() {

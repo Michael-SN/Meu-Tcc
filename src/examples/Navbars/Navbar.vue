@@ -23,6 +23,16 @@
         <!-- // Campo de Pesquisa - off por hora -->
         <ul class="navbar-nav justify-content-end">
           <li class="nav-item d-flex align-items-center">
+            <a
+              @click.prevent="$router.go(-1)"
+              class="px-0 nav-link font-weight-bold cursor-pointer"
+              :class="textWhite ? textWhite : 'text-body'"
+            >
+              <i class="fa fa-long-arrow-left"></i>
+              <span class="d-sm-inline d-none ps-2">Voltar</span>
+            </a>
+          </li>
+          <li class="nav-item d-flex align-items-center ms-4">
             <router-link
               :to="{ name: 'Logout' }"
               class="px-0 nav-link font-weight-bold"
@@ -217,7 +227,6 @@ export default {
   },
   computed: {
     currentRouteName() {
-      // console.log(this.$route);
       return this.$route.name;
     },
   },

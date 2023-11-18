@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Dashboard from "@/views/Dashboard.vue";
+// import Dashboard from "@/views/Dashboard.vue";
 import Patient from "@/views/Patient/Patient.vue";
 import Profile from "@/views/Profile/Profile.vue";
 import SignIn from "@/views/SignIn/SignIn.vue";
@@ -11,11 +11,11 @@ const routes = [
     name: "Sign In",
     component: SignIn,
   },
-  {
-    path: "/dashboard",
-    name: "Dashboard",
-    component: Dashboard,
-  },
+  // {
+  //   path: "/dashboard",
+  //   name: "Dashboard",
+  //   component: Dashboard,
+  // },
   {
     path: "/patients",
     name: "Patients",
@@ -53,9 +53,30 @@ const routes = [
         component: () => import("@/views/Measure/MeasureCreate.vue"),
       },
       {
-        path: "edit",
+        path: "edit/:measureId",
         name: "measure-edit",
-        component: () => import("@/views/Measure/MeasureCreate.vue"),
+        component: () => import("@/views/Measure/MeasureEdit.vue"),
+      },
+    ],
+  },
+  {
+    path: "/anamnesis/:patientId",
+    name: "Anamnese",
+    children: [
+      {
+        path: "create",
+        name: "anamnesis-create",
+        component: () => import("@/views/Anamnesis/AnamnesisCreate.vue"),
+      },
+      {
+        path: "edit",
+        name: "anamnesis-edit",
+        component: () => import("@/views/Anamnesis/AnamnesisEdit.vue"),
+      },
+      {
+        path: "details",
+        name: "anamnesis-datails",
+        component: () => import("@/views/Anamnesis/Anamnesis.vue"),
       },
     ],
   },
@@ -82,7 +103,7 @@ const routes = [
   },
   {
     path: "/",
-    redirect: "/dashboard",
+    redirect: "/patients",
   },
 ];
 
@@ -96,7 +117,7 @@ router.beforeEach(async (to, from, next) => {
   const logged = await isAuthenticated();
 
   if (logged && to.name === "Sign In") {
-    next("/dashboard");
+    next("/patients");
   } else if (
     (logged && to.name === "Logout") ||
     (!logged && to.name !== "Sign In")

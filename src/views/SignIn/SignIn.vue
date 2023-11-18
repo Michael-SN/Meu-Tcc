@@ -134,7 +134,7 @@ export default {
         if (this.user.remember) localStorage.setItem("email_remember", this.user.email);
         else localStorage.removeItem("email_remember");
 
-        this.$router.push("/dashboard");
+        this.$router.push("/patients/list");
       } catch (error) {
         onToastify(error?.response?.data);
       }
