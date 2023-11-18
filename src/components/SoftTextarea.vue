@@ -1,6 +1,6 @@
 <template>
   <div class="form-group">
-    <label :for="id">
+    <label :for="id" class="text-sm">
       <slot />
     </label>
     <textarea
@@ -8,6 +8,8 @@
       class="form-control"
       rows="5"
       :placeholder="placeholder"
+      :value="value"
+      @input="$emit('update:value', $event.target.value)"
     ></textarea>
   </div>
 </template>
@@ -23,6 +25,10 @@ export default {
     placeholder: {
       type: String,
       default: "Your text here...",
+    },
+    value: {
+      type: String,
+      default: "",
     },
   },
 };
