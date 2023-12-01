@@ -21,30 +21,43 @@
                 </div>
                 <div class="card-body">
                   <form role="form" class="text-start" @submit.prevent="handleSignIn">
-                    <label>Email</label>
-                    <soft-input
-                      id="email"
-                      type="email"
-                      placeholder="Email"
-                      name="email"
-                      v-model:value="user.email"
-                    />
-                    <label>Senha</label>
-                    <soft-input
-                      id="password"
-                      type="password"
-                      placeholder="Password"
-                      name="password"
-                      v-model:value="user.password"
-                    />
-                    <soft-switch
-                      id="rememberMe"
-                      name="rememberMe"
-                      :checked="user.remember"
-                      v-model:checked="user.remember"
-                    >
-                      Lembrar-me
-                    </soft-switch>
+                    <div class="row">
+                      <label>E-mail</label>
+                      <soft-input
+                        id="email"
+                        type="email"
+                        placeholder="Email"
+                        name="email"
+                        v-model:value="user.email"
+                      />
+                    </div>
+                    <div class="row">
+                      <label>Senha</label>
+                      <soft-input
+                        id="password"
+                        :type="inputType"
+                        placeholder="Password"
+                        name="password"
+                        v-model:value="user.password"
+                      />
+                    </div>
+                    <div class="row">
+                      <div class="col-6">
+                        <soft-checkbox v-model:checked="showPass"
+                          >Mostrar senha</soft-checkbox
+                        >
+                      </div>
+                      <div class="col-6">
+                        <soft-switch
+                          id="rememberMe"
+                          name="rememberMe"
+                          :checked="user.remember"
+                          v-model:checked="user.remember"
+                        >
+                          Lembrar-me
+                        </soft-switch>
+                      </div>
+                    </div>
                     <div class="text-center">
                       <soft-button
                         class="my-4 mb-2"
@@ -70,6 +83,7 @@
 import SoftInput from "@/components/SoftInput.vue";
 import SoftSwitch from "@/components/SoftSwitch.vue";
 import SoftButton from "@/components/SoftButton.vue";
+import SoftCheckbox from "@/components/SoftCheckbox.vue";
 import logo from "@/assets/img/logo-nutrition.png";
 
 const body = document.getElementsByTagName("body")[0];
@@ -89,6 +103,7 @@ export default {
         password: "senha123",
         remember: false,
       },
+      showPass: false,
       request: {
         loading: false,
       },
@@ -98,6 +113,12 @@ export default {
     SoftInput,
     SoftSwitch,
     SoftButton,
+    SoftCheckbox,
+  },
+  computed: {
+    inputType() {
+      return this.showPass ? "string" : "password";
+    },
   },
   created() {
     this.toggleEveryDisplay();

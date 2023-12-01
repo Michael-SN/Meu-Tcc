@@ -23,6 +23,13 @@ export const resetState = (state, intialState) => {
 export const onToastify = (message) => {
   Toastify({
     text: message || "Error inesperado!",
+    duration: 3000,
+    close: true,
+    gravity: "top",
+    stopOnFocus: true,
+    style: {
+      background: "#fa193e",
+    },
   }).showToast();
 };
 
