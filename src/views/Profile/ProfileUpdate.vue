@@ -14,8 +14,11 @@
       <div class="row gx-4">
         <div class="col-auto my-auto">
           <div class="h-100">
-            <h5 class="mb-1">{{ user?.fullName }}</h5>
-            <p class="mb-0 text-sm font-weight-bold">{{ user?.email }}</p>
+            <h5 class="mb-1">Alterar informações do nutricionista</h5>
+            <span
+              >Operação possível caso haja alguma divergência com relação aos dados do
+              profissional</span
+            >
           </div>
         </div>
       </div>
@@ -37,7 +40,7 @@
                   type="text"
                   placeholder="Nome completo"
                   aria-label="Name"
-                  v-model:value="userLocal.fullName"
+                  v-model:value.lazy="userLocal.fullName"
                 />
               </div>
               <div class="col-5">
@@ -59,7 +62,7 @@
                   type="email"
                   placeholder="Email"
                   aria-label="Email"
-                  v-model:value="userLocal.email"
+                  v-model:value.lazy="userLocal.email"
                 />
               </div>
             </div>
@@ -154,7 +157,6 @@
                   placeholder="Ex.: Niterói"
                   aria-label="Ex.: Niterói"
                   v-model:value="userLocal.city"
-                  disabled
                 />
               </div>
               <div class="col-2">
@@ -165,7 +167,6 @@
                   placeholder="Ex.: RJ"
                   aria-label="Ex.: RJ"
                   v-model:value="userLocal.state"
-                  disabled
                 />
               </div>
             </div>

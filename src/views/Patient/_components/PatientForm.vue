@@ -72,7 +72,7 @@
                       >Feminino</soft-radio
                     >
                   </div>
-                  <div class="col-4">
+                  <!-- <div class="col-4">
                     <soft-radio
                       id="others"
                       name="gender"
@@ -80,7 +80,7 @@
                       v-model:value="patientLocal.gender"
                       >Outros</soft-radio
                     >
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>
@@ -175,7 +175,6 @@
                   placeholder="Ex.: Niterói"
                   aria-label="Ex.: Niterói"
                   v-model:value="patientLocal.city"
-                  disabled
                 />
               </div>
               <div class="col-2">
@@ -186,7 +185,6 @@
                   placeholder="Ex.: RJ"
                   aria-label="Ex.: RJ"
                   v-model:value="patientLocal.state"
-                  disabled
                 />
               </div>
             </div>

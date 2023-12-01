@@ -35,7 +35,7 @@
       </div>
     </div> -->
   </div>
-  <AnamnesisForm :anamnesisData="anamnesis" :onSubmit="handleCreate" action="Editar" />
+  <AnamnesisForm :anamnesisData="anamnesis" :onSubmit="handleUpdate" action="Editar" />
 </template>
 
 <script>
@@ -61,6 +61,24 @@ export default {
   },
   methods: {
     ...mapActions(["anamnesisList", "anamnesisUpdate"]),
+    async handleUpdate(dataAnamnesis) {
+      const patientId = this.$route.params.patientId;
+
+      const { success, error } = await this.anamnesisUpdate({
+        payload: dataAnamnesis,
+        patientId,
+      });
+
+      if (!success) {
+        const {
+          response: { data: message },
+        } = error;
+
+        onToastify(message);
+      } else {
+        this.$router.push(`/anamnesis/${patientId}/details`);
+      }
+    },
   },
   mounted() {
     this.$store.state.isAbsolute = true;

@@ -24,10 +24,10 @@ export default {
       };
     }
   },
-  anamnesisUpdate: async ({ commit }, { payload, anamnesisId }) => {
+  anamnesisUpdate: async ({ commit }, { payload, patientId }) => {
     try {
       const { data } = await axiosInstance.put(
-        `${PRIVATE_API}/anamnesis/update/${anamnesisId}`,
+        `${PRIVATE_API}/anamnesis/update/${patientId}`,
         payload
       );
       commit(mutation.ANAMNESIS_DATA, {
