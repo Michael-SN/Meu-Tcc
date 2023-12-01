@@ -1,116 +1,113 @@
 import axiosInstance from "@/axios";
-import * as mutation from './mutation-types'
-import { PRIVATE_API } from '@/config'
+import * as mutation from "./mutation-types";
+import { PRIVATE_API } from "@/config";
 
 export default {
   patientCreate: async ({ commit }, payload) => {
     try {
+      console.log("BEFORE", payload);
 
-      const { data } = await axiosInstance.post(`${PRIVATE_API}/patient/create`, payload)
+      const { data } = await axiosInstance.post(
+        `${PRIVATE_API}/patient/create`,
+        payload
+      );
 
-      commit(mutation.PATIENT_DATA, data)
+      commit(mutation.PATIENT_DATA, data);
+
+      console.log("AFTER", data);
 
       return {
         success: true,
-        data
-      }
-
+        data,
+      };
     } catch (error) {
-
       return {
         success: false,
-        error
-      }
+        error,
+      };
     }
   },
 
   patientList: async ({ commit }) => {
     try {
+      const { data } = await axiosInstance.get(`${PRIVATE_API}/patient/list`);
 
-      const { data } = await axiosInstance.get(`${PRIVATE_API}/patient/list`)
-
-      commit(mutation.PATIENT_LIST, data)
+      commit(mutation.PATIENT_LIST, data);
 
       return {
         success: true,
-      }
-
+      };
     } catch (error) {
-
       return {
         success: false,
-        error
-      }
+        error,
+      };
     }
   },
 
   patientData: async ({ state, commit }, payload) => {
-
     try {
-
-      const patient = state?.patient
+      const patient = state?.patient;
 
       if (patient?.id === +payload) {
         return {
-          success: true
-        }
+          success: true,
+        };
       }
 
-      const patientData = await axiosInstance.get(`${PRIVATE_API}/patient/list/${payload}`)
-      commit(mutation.PATIENT_DATA, patientData.data)
+      const patientData = await axiosInstance.get(
+        `${PRIVATE_API}/patient/list/${payload}`
+      );
+      commit(mutation.PATIENT_DATA, patientData.data);
 
       return {
         success: true,
-      }
-
+      };
     } catch (error) {
-
       return {
         success: false,
-        error
-      }
+        error,
+      };
     }
   },
 
   patientDelete: async ({ commit }, payload) => {
     try {
+      await axiosInstance.delete(`${PRIVATE_API}/patient/delete/${payload}`);
 
-      await axiosInstance.delete(`${PRIVATE_API}/patient/delete/${payload}`)
-
-      commit(mutation.PATIENT_DATA, null)
+      commit(mutation.PATIENT_DATA, null);
 
       return {
         success: true,
-      }
-
-
+      };
     } catch (error) {
       return {
         success: false,
-        error
-      }
+        error,
+      };
     }
   },
 
   patientUpdate: async ({ state, commit }, payload) => {
     try {
+      const patientId = state?.patient.id;
 
-      const patientId = state?.patient.id
+      const { data } = await axiosInstance.put(
+        `${PRIVATE_API}/patient/update/${patientId}`,
+        payload
+      );
 
-      const { data } = await axiosInstance.put(`${PRIVATE_API}/patient/update/${patientId}`, payload)
-
-      commit(mutation.PATIENT_DATA, data)
+      commit(mutation.PATIENT_DATA, data);
 
       return {
         success: true,
-        data
-      }
-
+        data,
+      };
     } catch (error) {
       return {
         success: false,
-        error
-      }
+        error,
+      };
     }
-  }
-}
+  },
+};

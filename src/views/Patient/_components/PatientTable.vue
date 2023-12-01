@@ -48,12 +48,12 @@
               </td>
               <td>
                 <router-link
-                  :to="`/patients/${patient.id}/details`"
+                  :to="`/patients/${patient?.id}/details`"
                   class="text-secondary font-weight-bold text-xs text-dark"
                   data-toggle="tooltip"
                   data-original-title="Edit user"
                 >
-                  <i class="fa fa-external-link" aria-hidden="true"></i>
+                  <i class="fa fa-eye" aria-hidden="true"></i>
                   <span class="ms-2">Visualizar</span>
                 </router-link>
               </td>

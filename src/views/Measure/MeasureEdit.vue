@@ -21,13 +21,17 @@
       </div>
     </div>
   </div>
-  <MeasureForm :onSubmit="handleCreate" />
+  <MeasureForm
+    :measureData="getMeasure(+getMeasureId)"
+    :onSubmit="handleUpdate"
+    action="Editar"
+  />
 </template>
 
 <script>
 import register from "@/views/Measure/_store/register";
 import { createNamespacedHelpers } from "vuex";
-const { mapActions } = createNamespacedHelpers("measures");
+const { mapActions, mapGetters } = createNamespacedHelpers("measures");
 
 import MeasureForm from "./_components/MeasureForm.vue";
 
@@ -36,19 +40,26 @@ import setNavPills from "@/assets/js/nav-pills.js";
 import setTooltip from "@/assets/js/tooltip.js";
 
 export default {
-  name: "measureCreate",
+  name: "MeasureEdit",
   components: {
     MeasureForm,
   },
+  computed: {
+    ...mapGetters(["getMeasure"]),
+    getMeasureId() {
+      return this.$route.params.measureId;
+    },
+    getPatientId() {
+      return this.$route.params.patientId;
+    },
+  },
   methods: {
-    ...mapActions(["measureCreate"]),
+    ...mapActions(["measureList", "measureUpdate"]),
 
-    async handleCreate(dataMeasure) {
-      const patientId = this.$route.params.patientId;
-
-      const { success, error } = await this.measureCreate({
+    async handleUpdate(dataMeasure) {
+      const { success, error } = await this.measureUpdate({
         payload: dataMeasure,
-        patientId,
+        measureId: this.getMeasureId,
       });
 
       if (!success) {
@@ -58,7 +69,7 @@ export default {
 
         onToastify(message);
       } else {
-        this.$router.push(`/patients/${patientId}/details`);
+        this.$router.push(`/patients/${this.getPatientId}/details`);
       }
     },
   },
@@ -70,8 +81,18 @@ export default {
   beforeMount() {
     this.$store.state.isAbsolute = false;
   },
-  created() {
+  async created() {
     register(this.$store);
+
+    const { error, success } = await this.measureList(this.getPatientId);
+
+    if (!success) {
+      const {
+        response: { data: message },
+      } = error;
+
+      onToastify(message);
+    }
   },
 };
 </script>

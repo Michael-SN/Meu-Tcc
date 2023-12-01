@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
     <div
-      class="mt-4 page-header min-height-200 border-radius-xl bg-dark"
+      class="mt-4 page-header min-height-300 border-radius-xl bg-dark"
       :style="{
         backgroundImage:
           'url(' + require('@/assets/img/curved-images/curved14.jpg') + ')',
@@ -13,41 +13,43 @@
     <div class="mx-4 overflow-hidden card card-body blur shadow-blur mt-n6">
       <div class="row gx-4">
         <div class="col-auto my-auto">
-          <div class="h-100 py-2">
-            <h5 class="mb-1">Registrar Medidas</h5>
-            <small>Registrar medidas realizadas durante a consulta</small>
+          <div class="h-100">
+            <h5 class="mb-1">Anamnese do Paciente</h5>
+            <p class="mb-0 text-sm font-weight-bold">
+              Informções sobre consumo, hábitos e costumes do paciente
+            </p>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <MeasureForm :onSubmit="handleCreate" />
+  <AnamnesisForm :onSubmit="handleCreate" />
 </template>
 
 <script>
-import register from "@/views/Measure/_store/register";
+import register from "@/views/Anamnesis/_store/register";
 import { createNamespacedHelpers } from "vuex";
-const { mapActions } = createNamespacedHelpers("measures");
+const { mapActions } = createNamespacedHelpers("anamnesis");
 
-import MeasureForm from "./_components/MeasureForm.vue";
+import AnamnesisForm from "./_components/AnamnesisForm.vue";
 
 import { onToastify } from "@/helpers";
 import setNavPills from "@/assets/js/nav-pills.js";
 import setTooltip from "@/assets/js/tooltip.js";
 
 export default {
-  name: "measureCreate",
+  name: "AnamnesisCreate",
   components: {
-    MeasureForm,
+    AnamnesisForm,
   },
   methods: {
-    ...mapActions(["measureCreate"]),
+    ...mapActions(["anamnesisCreate"]),
 
-    async handleCreate(dataMeasure) {
+    async handleCreate(dataAnamnesis) {
       const patientId = this.$route.params.patientId;
 
-      const { success, error } = await this.measureCreate({
-        payload: dataMeasure,
+      const { success, error } = await this.anamnesisCreate({
+        payload: dataAnamnesis,
         patientId,
       });
 
@@ -58,7 +60,7 @@ export default {
 
         onToastify(message);
       } else {
-        this.$router.push(`/patients/${patientId}/details`);
+        this.$router.push(`/anamnesis/${patientId}/details`);
       }
     },
   },
@@ -72,6 +74,7 @@ export default {
   },
   created() {
     register(this.$store);
+    console.log(this.$route.params);
   },
 };
 </script>

@@ -18,15 +18,37 @@
             <p class="mb-0 text-sm font-weight-bold">{{ patient?.email }}</p>
           </div>
         </div>
-        <div class="mx-auto mt-3 col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0">
+        <div class="mx-auto mt-3 col-md-6 my-sm-auto ms-sm-auto me-sm-0">
           <div class="nav-wrapper position-relative end-0">
-            <ul class="p-1 bg-transparent nav nav-pills nav-fill" role="tablist">
-              <li class="nav-item">
+            <ul
+              class="p-1 bg-transparent nav align-items-center justify-content-end"
+              role="tablist"
+            >
+              <li class="nav-item px-2">
                 <router-link
-                  class="px-0 py-1 mb-0 nav-link active"
+                  class="nav-link mb-0 text-dark"
                   :to="`/measure/${patient?.id}/create`"
                 >
                   <span class="ms-1">Registrar medidas</span>
+                </router-link>
+              </li>
+              <li
+                v-if="anamnesis === undefined || anamnesis === null"
+                class="nav-item px-2"
+              >
+                <router-link
+                  class="nav-link mb-0 text-dark"
+                  :to="`/anamnesis/${patient?.id}/create`"
+                >
+                  <span class="ms-1">Realizar anamnese</span>
+                </router-link>
+              </li>
+              <li v-else class="nav-item px-2">
+                <router-link
+                  class="nav-link mb-0 text-dark"
+                  :to="`/anamnesis/${patient?.id}/details`"
+                >
+                  <span class="ms-1">Visualizar Anamnese</span>
                 </router-link>
               </li>
             </ul>
@@ -45,7 +67,14 @@
   <div class="container-fluid">
     <div class="mt-3 row">
       <div class="mt-4 col-12">
-        <MeasureTable :measures="measures" />
+        <MeasureTable
+          v-if="measures.length !== 0"
+          :measures="measures"
+          :patient="patient"
+        />
+        <h4 v-else class="text-md text-center">
+          O Paciente ainda não teve suas medidas registradas
+        </h4>
       </div>
     </div>
   </div>
@@ -62,6 +91,11 @@ const {
   mapActions: mapActionsMeasure,
 } = createNamespacedHelpers("measures");
 
+const {
+  mapState: mapStateAnamnesis,
+  mapActions: mapActionsAnamnesis,
+} = createNamespacedHelpers("anamnesis");
+
 import { onToastify } from "@/helpers";
 
 import PatientInfoCard from "@/views/Patient/_components/PatientInfoCard.vue";
@@ -76,26 +110,6 @@ export default {
     PatientInfoCard,
     MeasureTable,
   },
-  data() {
-    return {
-      bodyMeasurements: {
-        height: "0",
-        weight: "0",
-        head: "0",
-        neck: "0",
-        shoulders: "0",
-        chest: "0",
-        right_arm: "0",
-        left_arm: "0",
-        waist: "0",
-        hips: "0",
-        right_thigh: "0",
-        left_thigh: "0",
-        right_calf: "0",
-        left_calf: "0",
-      },
-    };
-  },
   mounted() {
     this.$store.state.isAbsolute = true;
     setNavPills();
@@ -107,26 +121,29 @@ export default {
   computed: {
     ...mapStatePatient(["patient"]),
     ...mapStateMeasure(["measures"]),
-  },
-  async created() {
-    const patientId = this.$route.params.id;
-
-    const [patientResponse, measureResponse] = await Promise.all([
-      this.patientData(patientId),
-      this.measureList(patientId),
-    ]);
-
-    if (!patientResponse.success || !measureResponse.success) {
-      const {
-        response: { data: message },
-      } = patientResponse.error || measureResponse.error;
-
-      onToastify(message);
-    }
+    ...mapStateAnamnesis(["anamnesis"]),
   },
   methods: {
     ...mapActionsPatient(["patientData"]),
     ...mapActionsMeasure(["measureList", "measureCreate"]),
+    ...mapActionsAnamnesis(["anamnesisList"]),
+  },
+  async created() {
+    const patientId = this.$route.params.id;
+
+    const [patientResponse, measureResponse, anamnesisResponse] = await Promise.all([
+      this.patientData(patientId),
+      this.measureList(patientId),
+      this.anamnesisList(patientId),
+    ]);
+
+    if (!patientResponse.success || !measureResponse.success || !anamnesisResponse) {
+      const {
+        response: { data: message },
+      } = patientResponse.error || measureResponse.error || anamnesisResponse.error;
+
+      onToastify(message);
+    }
   },
 };
 </script>

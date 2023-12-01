@@ -21,17 +21,17 @@
               <th
                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
               >
-                Peitoral (cm)
+                Nível de água (%)
               </th>
               <th
                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
               >
-                Cintura (cm)
+                Gordura Visceral
               </th>
               <th
                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
               >
-                Quadril (cm)
+                Taxa Metabólica Basal (TMB)
               </th>
               <th
                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
@@ -44,24 +44,56 @@
           <tbody>
             <tr v-for="measure in measures" :key="measure.id">
               <td class="align-middle text-sm">
-                <p class="text-xs font-weight-bold mb-0">{{ measure.height }} cm</p>
+                <p class="text-xs font-weight-bold mb-0">{{ measure.height }}&nbsp;cm</p>
               </td>
               <td class="align-middle text-sm">
-                <p class="text-xs font-weight-bold mb-0">{{ measure.weight }} kg</p>
+                <p class="text-xs font-weight-bold mb-0">{{ measure.weight }}&nbsp;kg</p>
               </td>
               <td class="align-middle text-sm">
-                <p class="text-xs font-weight-bold mb-0">{{ measure.chest }} cm</p>
+                <p class="text-xs font-weight-bold mb-0">
+                  {{ measure.water_level + "&nbsp;%" || "&nbsp;Não registrado" }}
+                </p>
               </td>
               <td class="align-middle text-sm">
-                <p class="text-xs font-weight-bold mb-0">{{ measure.waist }} cm</p>
+                <p class="text-xs font-weight-bold mb-0">
+                  {{ measure.visceral_fat + "&nbsp;" || "&nbsp;Não registrado" }}
+                </p>
               </td>
               <td class="align-middle text-sm">
-                <p class="text-xs font-weight-bold mb-0">{{ measure.hips }} cm</p>
+                <p class="text-xs font-weight-bold mb-0">
+                  {{
+                    measure.basal_metabolic_rate + "&nbsp;Kcal" || "&nbsp;Não registrado"
+                  }}
+                </p>
               </td>
               <td class="align-middle text-sm">
                 <p class="text-xs font-weight-bold mb-0">
                   {{ formatterISODate(measure.updatedAt) }}
                 </p>
+              </td>
+              <td>
+                <button
+                  class="text-secondary font-weight-bold text-xs text-dark border border-0 bg-transparent"
+                  data-toggle="tooltip"
+                  data-original-title="View measure"
+                  data-bs-toggle="modal"
+                  data-bs-target="#measureModal"
+                  @click="measureId = measure?.id"
+                >
+                  <i class="fa fa-eye text-sm" aria-hidden="true"></i>
+                  <span class="ms-2">Visualizar</span>
+                </button>
+              </td>
+              <td>
+                <router-link
+                  :to="`/measure/${patient?.id}/edit/${measure?.id}`"
+                  class="text-secondary font-weight-bold text-xs text-dark"
+                  data-toggle="tooltip"
+                  data-original-title="Edit measure"
+                >
+                  <i class="fa fa-edit text-sm" aria-hidden="true"></i>
+                  <span class="ms-2">Editar Medida</span>
+                </router-link>
               </td>
             </tr>
           </tbody>
@@ -69,17 +101,37 @@
       </div>
     </div>
   </div>
+  <MeasureModal :measureInfo="measureInfoModal" :gender="patient?.gender" />
 </template>
 
 <script>
 import { formatterISODate } from "../../../helpers";
+import MeasureModal from "../../Measure/_components/MeasureModal.vue";
 
 export default {
   name: "measures-table",
+  data() {
+    return {
+      measureId: null,
+    };
+  },
   props: {
     measures: {
       type: Array,
       required: true,
+    },
+    patient: {
+      type: [null, Object],
+      required: true,
+      default: () => ({}),
+    },
+  },
+  components: {
+    MeasureModal,
+  },
+  computed: {
+    measureInfoModal() {
+      return this.measures.find((m) => m.id === this.measureId);
     },
   },
   methods: {

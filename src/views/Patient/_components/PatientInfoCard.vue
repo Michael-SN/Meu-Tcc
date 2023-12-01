@@ -2,35 +2,24 @@
   <div class="card h-100">
     <div class="p-4 pb-0 card-header">
       <div class="row">
-        <div class="col-md-8 d-flex align-items-center">
+        <div class="col-md-6 d-flex align-items-center">
           <h6 class="mb-0">{{ title }}</h6>
         </div>
-        <div class="col-md-4 text-end">
+        <div class="col-md-6 text-end">
           <ul class="d-flex justify-content-end list-unstyled gap-4 mb-0">
             <li>
               <router-link
-                class="btn btn-sm btn-success mb-0"
-                style="
-                  --bs-btn-padding-y: 0.25rem;
-                  --bs-btn-padding-x: 0.5rem;
-                  --bs-btn-font-size: 0.75rem;
-                "
+                class="btn btn-sm btn-outline-success mb-0"
                 :to="`/patients/${patient?.id}/edit`"
               >
-                <i class="text-sm fa fa-user-edit text-white"></i>
+                <i class="text-sm fa fa-user-edit text-success me-2"></i>
+                <small>Editar Paciente</small>
               </router-link>
             </li>
             <li>
-              <button
-                class="btn btn-sm btn-danger mb-0"
-                style="
-                  --bs-btn-padding-y: 0.25rem;
-                  --bs-btn-padding-x: 0.5rem;
-                  --bs-btn-font-size: 0.75rem;
-                "
-                @click="handleDelete"
-              >
-                <i class="text-sm fa fa-trash text-white"></i>
+              <button class="btn btn-sm btn-outline-danger mb-0" @click="handleDelete">
+                <i class="text-sm fa fa-trash text-danger pe-2"></i>
+                <small>Excluir Paciente</small>
               </button>
             </li>
           </ul>

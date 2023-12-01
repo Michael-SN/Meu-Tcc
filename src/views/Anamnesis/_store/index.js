@@ -2,8 +2,7 @@ import actions from "./actions";
 import mutations from "./mutations";
 
 const state = {
-  patient: null,
-  patients: [],
+  anamnesis: null,
 };
 
 export default {

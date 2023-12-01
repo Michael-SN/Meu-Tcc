@@ -1,3 +1,3 @@
-// export default {
-//   getPatient: state => id => state.patients.find(p => p.id === id)
-// }
+export default {
+  getMeasure: (state) => (id) => state.measures.find((m) => m.id === id),
+};

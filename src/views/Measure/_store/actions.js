@@ -41,4 +41,23 @@ export default {
       };
     }
   },
+  measureUpdate: async ({ commit, state }, { payload, measureId }) => {
+    try {
+      const { data } = await axiosInstance.put(
+        `${PRIVATE_API}/measure/update/${measureId}`,
+        payload
+      );
+
+      commit(mutation.MEASURE_LIST, { measures: [...state.measures, data] });
+
+      return {
+        success: true,
+      };
+    } catch (error) {
+      return {
+        success: false,
+        error,
+      };
+    }
+  },
 };

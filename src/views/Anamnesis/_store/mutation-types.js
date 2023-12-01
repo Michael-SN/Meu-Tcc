@@ -1,0 +1,1 @@
+export const ANAMNESIS_DATA = "ANAMNESIS_DATA";
